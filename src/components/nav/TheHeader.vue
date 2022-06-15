@@ -1,5 +1,15 @@
 <template>
   <div class="navBar">
+    <teleport to="body">
+      <GenericModal title="Logged out" v-if="modalIsOpen">
+        <template #default>
+          <h4>You have been successfully logged out of your account.</h4>
+        </template>
+        <template #actions>
+          <button class="btn btn-close" @click="this.modalIsOpen = false"></button>
+        </template>
+      </GenericModal>
+    </teleport>
     <div class="title">
       <h1 class="red">
         FS-
@@ -16,17 +26,40 @@
         Orders
       </p>
     </div>
-    <div class="login">
+    <div v-if="!isLoggedIn" class="login">
       <p>
-        Login
+        Log in
+      </p>
+    </div>
+    <div v-if="isLoggedIn" class="login" @click="logOut">
+      <p>
+        Log Out
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import GenericModal from "@/components/modal/GenericModal";
 export default {
-  name: "TheHeader"
+  components: {GenericModal},
+  name: "TheHeader",
+  computed: {
+    isLoggedIn(){
+      return this.$store.getters.isAuthenticated;
+    }
+  },
+  methods: {
+    logOut(){
+      this.$store.commit('logOut');
+      this.modalIsOpen = true;
+    }
+  },
+  data () {
+    return {
+      modalIsOpen: false
+    }
+  }
 }
 </script>
 
