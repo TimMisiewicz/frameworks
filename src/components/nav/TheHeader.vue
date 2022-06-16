@@ -18,7 +18,11 @@
     </div>
     <div class="products">
       <p>
-        Products
+        <router-link
+            style="text-decoration: none; color: inherit;"
+            to="/store">
+          Store
+        </router-link>
       </p>
     </div>
     <div class="orders">
@@ -28,7 +32,11 @@
     </div>
     <div v-if="!isLoggedIn" class="login">
       <p>
-        Log in
+        <router-link
+            style="text-decoration: none; color: inherit;"
+            to="/login">
+          Log in
+        </router-link>
       </p>
     </div>
     <div v-if="isLoggedIn" class="login" @click="logOut">
@@ -41,21 +49,22 @@
 
 <script>
 import GenericModal from "@/components/modal/GenericModal";
+
 export default {
   components: {GenericModal},
   name: "TheHeader",
   computed: {
-    isLoggedIn(){
+    isLoggedIn() {
       return this.$store.getters.isAuthenticated;
     }
   },
   methods: {
-    logOut(){
+    logOut() {
       this.$store.commit('logOut');
       this.modalIsOpen = true;
     }
   },
-  data () {
+  data() {
     return {
       modalIsOpen: false
     }
@@ -64,7 +73,7 @@ export default {
 </script>
 
 <style scoped>
-.navBar{
+.navBar {
   width: 100%;
   height: 75px;
   margin: 0;
@@ -74,29 +83,34 @@ export default {
   padding: 0 20px;
 }
 
-.title{
+.title {
   display: flex;
 }
-.title:hover{
+
+.title:hover {
   cursor: pointer;
 }
 
-.products, .orders, .login{
+.products, .orders, .login {
   display: flex;
   color: red;
   font-size: 150%;
 }
+
 .red {
   color: red;
 }
-.white{
+
+.white {
   color: white;
 }
-h1, p{
+
+h1, p {
   margin: auto;
   transition: 0.2s;
 }
-p:hover{
+
+p:hover {
   cursor: pointer;
   color: white;
   transition: 0.2s;

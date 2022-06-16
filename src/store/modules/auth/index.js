@@ -64,7 +64,6 @@ export default {
             const data = await response.json()
 
             if (!response.ok) {
-                console.log(await response)
                 const error = new Error(
                     'Failed to authenticate. Check your login data.'
                 );
