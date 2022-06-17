@@ -1,9 +1,9 @@
 <template>
   <div class="navBar">
     <teleport to="body">
-      <GenericModal title="Logged out" v-if="modalIsOpen">
+      <GenericModal :title="this.modalHeader" v-if="modalIsOpen">
         <template #default>
-          <h4>You have been successfully logged out of your account.</h4>
+          <h4>{{ this.modalBody }}</h4>
         </template>
         <template #actions>
           <button class="btn btn-close" @click="this.modalIsOpen = false"></button>
@@ -26,8 +26,12 @@
       </p>
     </div>
     <div class="orders">
-      <p>
-        Orders
+      <p @click="tryOrders">
+        <router-link
+            style="text-decoration: none; color: inherit;"
+            to="/orders">
+          Orders
+        </router-link>
       </p>
     </div>
     <div v-if="!isLoggedIn" class="login">
@@ -61,12 +65,26 @@ export default {
   methods: {
     logOut() {
       this.$store.commit('logOut');
+      this.openModalWithContent("Logged out", "You have been successfully logged out of your account.");
+      this.$router.push('/login');
+    },
+    openModalWithContent(header, body){
+      this.modalHeader = header;
+      this.modalBody = body;
       this.modalIsOpen = true;
+    },
+    tryOrders(){
+      if (!this.$store.getters.isAuthenticated){
+        this.openModalWithContent("Not logged in",
+            "Please log in, after you have logged in you will have access to the Orders page!")
+      }
     }
   },
   data() {
     return {
-      modalIsOpen: false
+      modalIsOpen: false,
+      modalHeader: '',
+      modalBody: ''
     }
   }
 }

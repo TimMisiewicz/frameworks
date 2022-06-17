@@ -38,7 +38,7 @@ export default {
             for (let i = 0; i < state.orderLines.length; i++){
                 if (state.orderLines[i].product === payload.givenId){
                     if (state.orderLines[i].amount === 1) {
-                        state.orderLines.splice(i);
+                        state.orderLines.splice(i,1);
                     }
                     state.orderLines[i].amount--;
                     return;
