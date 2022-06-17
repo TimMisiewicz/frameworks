@@ -1,4 +1,5 @@
 # frameworks
+Vue front-end for the SimpleWebshop backend in one of my other repo's.
 
 ## Project setup
 ```
