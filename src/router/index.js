@@ -5,7 +5,7 @@ import OrderView from "@/views/OrderView.vue";
 import store from "../store/index.js"
 
 const routes = [
-  { path: '/', redirect: '/login' },
+  { path: '/', redirect: '/store' },
   { path: '/login', component: LoginView},
   { path: '/store', component: StoreView},
   {path: '/orders', component: OrderView, beforeEnter: () => {
