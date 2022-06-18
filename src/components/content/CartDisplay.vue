@@ -190,6 +190,6 @@ font-size: 150%;
   justify-content: space-evenly;
 }
 .subTotal{
-  width: 90%;
+  width: 100%;
 }
 </style>
