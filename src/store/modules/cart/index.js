@@ -39,6 +39,7 @@ export default {
                 if (state.orderLines[i].product === payload.givenId){
                     if (state.orderLines[i].amount === 1) {
                         state.orderLines.splice(i,1);
+                        return;
                     }
                     state.orderLines[i].amount--;
                     return;
